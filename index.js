@@ -36,7 +36,7 @@ client.on('ready', function () {
 });
 client.on('messageCreate', function (message) {
     if (message.content === 'ping') {
-        message.reply({ content: 'pong' });
+        message.reply({ content: 'pong!!!' });
     }
 });
 client.login(process.env.TOKEN);
