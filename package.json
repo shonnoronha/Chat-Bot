@@ -17,6 +17,7 @@
     "ts-node": "^10.2.1",
     "wokcommands": "^1.5.3"
   },
+  "type": "module",
   "engines": {
     "node": "16.x"
   },
