@@ -36,7 +36,6 @@ var client = new discord_js_1.default.Client({
 client.on('ready', function () {
     new wokcommands_1.default(client, {
         commandDir: path_1.default.join(__dirname, 'commands'),
-        typeScript: true,
         testServers: ['896753766731223040'],
     });
     console.log('The bot is now online');

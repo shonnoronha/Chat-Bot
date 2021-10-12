@@ -15,7 +15,6 @@ const client = new DiscordJS.Client({
 client.on('ready', () => {
     new WOKcommands(client, {
         commandDir: path.join(__dirname, 'commands'),
-        typeScript: true,
         testServers:['896753766731223040'],
     })
     console.log('The bot is now online');

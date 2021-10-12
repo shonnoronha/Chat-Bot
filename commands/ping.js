@@ -6,7 +6,6 @@ exports.default = {
     slash: 'both',
     testOnly: true,
     callback: function (_a) {
-        var interaction = _a.interaction;
-        interaction.reply('pong new');
+        return 'pong new';
     }
 };
