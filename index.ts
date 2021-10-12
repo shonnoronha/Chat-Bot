@@ -16,6 +16,7 @@ client.on('ready', () => {
     new WOKcommands(client, {
         commandDir: path.join(__dirname, 'commands'),
         testServers:['896753766731223040'],
+        typeScript:true,
     })
     console.log('The bot is now online');
 });
