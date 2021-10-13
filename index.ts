@@ -18,6 +18,7 @@ client.on('ready', () => {
         testServers:['896753766731223040'],
         typeScript:true,
     })
+        .setDefaultPrefix('.');
     console.log('The bot is now online');
 });
 
