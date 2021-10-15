@@ -9,8 +9,7 @@ const client = new DiscordJS.Client({
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES
-    ],
-    partials: ["MESSAGE", "REACTION", "USER"],
+    ]
 });
 
 client.on('ready', () => {
@@ -21,7 +20,6 @@ client.on('ready', () => {
     })
         .setDefaultPrefix('.');
     console.log('The bot is now online');
-    console.log(`[sniper] :: Logged in as ${client!.user!.tag}.`);
 });
 
 client.login(process.env.TOKEN);
