@@ -17,6 +17,7 @@
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.2.0",
     "dotenv": "^10.0.0",
+    "mongoose": "^6.0.12",
     "node-fetch": "^3.0.0",
     "ts-node": "^10.2.1",
     "wokcommands": "^1.5.3",

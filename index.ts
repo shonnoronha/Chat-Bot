@@ -10,14 +10,18 @@ const client = new DiscordJS.Client({
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.GUILD_PRESENCES,
+        Intents.FLAGS.GUILD_MEMBERS
     ]
 });
 
 client.on('ready', () => {
     new WOKcommands(client, {
         commandDir: path.join(__dirname, 'commands'),
-        testServers: ['896753766731223040'],
+        featureDir : path.join(__dirname, 'features'),
+        testServers: [process.env.GUILD_ID!],
         typeScript: true,
+        mongoUri: process.env.MONGO_URI
     })
         .setDefaultPrefix('.');
     console.log('The bot is now online');
