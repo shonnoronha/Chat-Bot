@@ -1,11 +1,11 @@
-import DiscordJS, { Intents } from 'discord.js';
+import { Intents, TextChannel, Client } from 'discord.js';
 import dotenv from 'dotenv';
 import WOKcommands from 'wokcommands';
 import path from 'path';
 
 dotenv.config();
 
-const client = new DiscordJS.Client({
+const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
@@ -16,6 +16,8 @@ const client = new DiscordJS.Client({
 });
 
 client.on('ready', () => {
+    const channel = client.channels.cache.get('904008708277825626') as TextChannel;
+    channel.send('Bot is Now Online in ' + channel.guild.name);
     new WOKcommands(client, {
         commandDir: path.join(__dirname, 'commands'),
         featureDir : path.join(__dirname, 'features'),

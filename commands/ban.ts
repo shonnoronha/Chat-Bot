@@ -1,21 +1,29 @@
-import { MessageActionRow, MessageButton } from "discord.js";
+import { GuildMember, MessageActionRow, MessageButton } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
     category: "Testing",
     description: "Bans a mentioned User",
-    requiredPermissions: ['ADMINISTRATOR'],
-    expectedArgsTypes:['MENTIONABLE'],
-    minArgs:1,
+    // requireRoles: true,
+    requiredPermissions : ['ADMINISTRATOR'],
+    minArgs:2,
     testOnly: true,
-    expectedArgs:'user',
+    expectedArgs:'<user> <reason>',
     slash: true,
-    options: [{
-        name: 'user',
-        description: 'user',
-        type: 'MENTIONABLE',
-        required:true,
-    }],
+    options: [
+        {
+            name: 'user',
+            description: 'user to be banned',
+            type: 'USER',
+            required:true,
+        },
+        {
+            name: 'reason',
+            description: 'reason for the ban',
+            type: 'STRING',
+            required:true,
+        },
+],
     callback: async ({ interaction: msgInt, channel }) => {
         const row = new MessageActionRow() 
                         .addComponents(
@@ -33,9 +41,12 @@ export default {
                                 .setCustomId('NO')
                         );
         
+        const target = msgInt.options.getMember('user') as GuildMember;
+        
         msgInt.reply({
-            content:`Confirm ban on <@${msgInt.options.get('user')?.user?.id}>`,
+            content:`Confirm ban on ${target.user.username}`,
             components:[row],
+            ephemeral : true,
         });
         
         const filter = (btnInt:{user:{id:string}})=>{
@@ -45,15 +56,25 @@ export default {
         const collector = channel.createMessageComponentCollector({
             filter,
             max:1,
-            time: 15 * 1000
+            time: 30 * 1000
         });
 
         collector.on('end', async collection=>{
             const responder = collection.first();
             if (responder?.customId === 'BAN'){
-                // TODO : implement ban
+                if (!target.bannable){
+                    msgInt.editReply({
+                        content : `cannot ban ${target.user.username}`,
+                        components : [],
+                    });
+                    return;
+                }
+                target.ban({
+                    reason : msgInt.options.getString('reason')!,
+                    days : 7
+                });
                 await msgInt.editReply({
-                    content:`BANNED ${msgInt.options.get('user')?.user?.username}`,
+                    content:`banned ${target.user.username}`,
                     components:[],
                 });
                 
