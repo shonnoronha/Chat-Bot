@@ -22,6 +22,7 @@ client.on('ready', () => {
         commandDir: path.join(__dirname, 'commands'),
         featureDir : path.join(__dirname, 'features'),
         testServers: [process.env.GUILD_ID!],
+        botOwners : [process.env.OWNER_ID!],
         typeScript: true,
         mongoUri: process.env.MONGO_URI
     })
